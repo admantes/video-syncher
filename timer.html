@@ -1,0 +1,166 @@
+<!DOCTYPE html> 
+<html> 
+
+<head>
+<style>
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: teal;
+    color: white;
+   
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+</style>
+<script src="https://unpkg.com/wavesurfer.js"></script>
+</head>
+<body  onkeypress="checkKey(event)"> 
+
+
+
+Current Text (You can use Enter key to log Cue Points):
+<div id="counterDiv"> 0 of 0 </div>
+<div id="curText" style="width:100%;height:100px;background-color:teal;color:white;font-size:20px;font-weight:bold;"> This is the current text</div>
+<video id="myVideo" width="720" height="404" controls>
+  <source src="video.mp4?token=1321654asdfas" type="video/mp4">
+ 
+  Your browser does not support HTML5 video.
+</video>
+ 
+<textarea id="outtext" rows="30" cols="100"> </textarea>
+<br>
+
+<br>
+
+Source Script:
+<textarea id="mtxt"  rows="7" cols="200"> </textarea>
+
+<div id="waveform"></div>
+
+<script>
+var srcArr;
+var counter = 0;
+var endTag = false;
+var vid = document.getElementById("myVideo");
+var srcText = document.getElementById("mtxt");
+var displayText = document.getElementById("curText");
+var counterText = document.getElementById("counterDiv");
+var outText = document.getElementById("outtext");
+function getCurTime() { 
+   // alert(vid.currentTime);
+	// alert(srcText.value);
+	 
+	var ar = srcText.value.split("\n");
+	console.log(ar); 
+	if(endTag==false){
+		outText.value += "\n" + "<st tStart='" + convertTime(vid.currentTime-0.4) + "' tEnd='";
+		curText.style.backgroundColor = "orange"; //#3399CC
+		
+	}else{
+		outText.value +=  "" + convertTime(vid.currentTime) + "'>" + srcArr[counter] + "</st>" ;
+		displayText.innerHTML = srcArr[counter+1];
+		counter++;
+		curText.style.backgroundColor = "teal";
+	}
+	
+	endTag = !endTag;
+	
+	//<st tStart='00:08:11' tEnd='00:27:15'>(radio announcer)  </st>			
+
+	UpdateCounter();
+} 
+
+function setTextSource() { 
+	counter = 0;
+   srcArr = srcText.value.split("\n");
+   displayText.innerHTML = srcArr[counter];
+   UpdateCounter();
+} 
+
+function Back(){
+	counter--;
+	displayText.innerHTML = srcArr[counter];
+	UpdateCounter();
+}
+
+
+
+function Forward(){
+	counter++;
+	displayText.innerHTML = srcArr[counter];
+	UpdateCounter();
+}
+
+
+function convertTime(totalSeconds){
+
+	var hours   = Math.floor(totalSeconds / 3600);
+	  var minutes = Math.floor((totalSeconds - (hours * 3600)) / 60);
+	  var seconds = Math.floor(totalSeconds - (hours * 3600) - (minutes * 60));
+	   var secondsRaw =  totalSeconds - (hours * 3600) - (minutes * 60);
+		console.log(seconds);
+		console.log(secondsRaw);
+	  var mils = (secondsRaw - seconds)*100  ;
+
+	  // round seconds
+	  seconds = Math.round(seconds * 100) / 100;
+	 mils = Math.round((mils * 100) / 100);
+	  //var result = (hours < 10 ? "0" + hours : hours);
+	  var result = "";
+		  result +=   (minutes < 10 ? "0" + minutes : minutes);
+		  result += ":" + (seconds  < 10 ? "0" + seconds : seconds);
+		   result += ":" + (mils  < 10 ? "0" + mils : mils);
+	  return result;
+
+}
+
+function checkKey(event) {
+    var x = event.which || event.keyCode;
+   
+   if(x == 13){
+   
+	getCurTime();
+   }
+}
+
+function UpdateCounter(){
+var curNum = (counter+1);
+	counterText.innerHTML = curNum + " of " + srcArr.length;
+}
+
+
+var wavesurfer = WaveSurfer.create({
+    container: '#waveform',
+    waveColor: 'violet',
+    progressColor: 'purple'
+});
+
+wavesurfer.load('video.mp4');
+
+wavesurfer.on('ready', function () {
+    wavesurfer.play();
+});
+</script> 
+ 
+
+
+<div class="footer">
+<div style="position:relative;left:0px;float:left;"><button onclick="setTextSource()" type="button" class="button">Set Source Text </button> </div>
+<div style="position:relative;left:100px;top:0px;float:left;"><button onclick="Back()" type="button" class="button">Back </button> </div>
+<div style="position:relative;left:200px;top:0px;float:left;"><button onclick="Forward()" type="button" class="button">Forward </button> </div>
+<div style="position:relative;left:600px;top:0px;"> <button onclick="getCurTime()" type="button" class="button"> MARK CUE POINT </button> </div>
+</div>
+</body> 
+</html>

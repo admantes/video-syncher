@@ -12,13 +12,13 @@
   <script src="https://unpkg.com/wavesurfer.js"></script>
 </head>
 <body>
-  <nav class="cyan darken-3" role="navigation">
+  <nav class="light-blue darken-4" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo"> Video Timer</a>
       <ul class="right hide-on-med-and-down">
-        <li><a class="waves-effect waves-light btn  orange darken-3"><i class="material-icons left">event</i>Load Clipboard</a></li>
-        <li><a class="waves-effect waves-light btn  amber darken-2"><i class="material-icons left">event</i>Previous Caption</a></li>
-        <li><a class="waves-effect waves-light btn  amber darken-2"><i class="material-icons left">event</i>Next Caption</a></li>
-        <li><a class="waves-effect waves-light btn  orange darken-3"><i class="material-icons left">event</i>Mark Cuepoint</a></li>
+        <li><a class="waves-effect waves-light btn  orange darken-3"><i class="material-icons left">archive</i>Load Clipboard</a></li>
+        <li><a class="waves-effect waves-light btn  amber darken-2"><i class="material-icons left">arrow_back</i>Previous Caption</a></li>
+        <li><a class="waves-effect waves-light btn  amber darken-2"><i class="material-icons left">arrow_forward</i>Next Caption</a></li>
+        <li><a class="waves-effect waves-light btn  orange darken-3"><i class="material-icons left">check_box</i>Mark Cuepoint</a></li>
       </ul>
 
       <ul id="nav-mobile" class="sidenav">
@@ -32,7 +32,7 @@
       <div class="row">
           <div class="col s12 m12">
               <ul class="collection">                 
-                  <li class="collection-item cyan lighten-3"> 
+                  <li class="collection-item   light-blue lighten-1"> 
                     <span> <h5>1 of 6</h5></span> 
                     <span>This is the text</span></li>
                  
@@ -54,11 +54,13 @@
             <h2 class="center light-blue-text"><i class="material-icons">ondemand_video</i></h2>
             <h5 class="center">Current Video </h5>
 -->
-            <video id="myVideo" width="720" height="404" controls>
+<div class="video-container">
+  <video id="myVideo"  controls>
               <source src="video.mp4?token=1321654asdfas" type="video/mp4">
              
               Your browser does not support HTML5 video.
             </video>
+            </div> 
             <div id="waveform"></div>
           </div>
         </div>
@@ -78,10 +80,7 @@
             <li class="collection-item"><div> This is a text entry <a href="#!" class="secondary-content"><i class="material-icons">create</i></a></div></li>
             <li class="collection-item"><div>This is a text entry <a href="#!" class="secondary-content"><i class="material-icons">create</i></a></div></li>
             <li class="collection-item"><div>This is a text entry <a href="#!" class="secondary-content"><i class="material-icons">create</i></a></div></li>
-            <li class="collection-item"><div> This is a text entry <a href="#!" class="secondary-content"><i class="material-icons">create</i></a></div></li>
-            <li class="collection-item"><div> This is a text entry <a href="#!" class="secondary-content"><i class="material-icons">create</i></a></div></li>
-            <li class="collection-item"><div>This is a text entry <a href="#!" class="secondary-content"><i class="material-icons">create</i></a></div></li>
-            <li class="collection-item"><div>This is a text entry <a href="#!" class="secondary-content"><i class="material-icons">create</i></a></div></li>
+           
           </ul>
         </div>
 
